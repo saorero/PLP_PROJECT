@@ -1,0 +1,128 @@
+/* THE LOGIN AND SIGN UP PAGES  CODE FOR STYLING*/
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+
+    background-color: #ECF2FF;
+}
+.min_top{
+
+display: flex;
+
+
+}
+.min_top img{
+width: 50%;
+height: 100%;
+object-fit: contain;
+
+
+}
+button{
+
+padding: 10px;
+border-radius: 50px;
+border: none;
+width: 60%;
+background-color: #cb6ce6;
+
+}
+
+.min_top2{
+margin-left: auto;
+margin-top: 40px;
+width: 10%;
+
+}
+
+.searchMan, .searchMan2{
+
+width: 464.74px;
+height: 455.13px;
+transform: rotate(7.72deg);
+}
+.creationmoe{
+display: flex;
+justify-content: center;
+
+
+}
+
+.moeform{
+display: flex;
+flex-direction: column;
+
+
+}
+/*To increasr the margin top of the login forms*/
+#mmt{
+    margin-top: 30px;
+}
+#mmt2{
+  
+  padding: 10px;
+}
+
+
+.moeform form{
+
+margin-top: 40px;
+
+padding: 20px;
+text-align: center;
+background: rgba(236, 242, 255, 0.4);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+.moeform input{
+    width: 80%;
+    background: #ECF2FF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
+}
+.moeform input[type=submit]{
+background-color: #cb6ce6;
+border-radius: 50px;
+width: 90%;
+padding: 10px;
+}
+
+.moeform i{
+position: absolute;
+margin: 30px;
+}
+.moeform .formhead{
+
+
+background: #ECF2FF;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+padding: 20px;
+text-align: center;
+
+
+}
+
+ /* Available in the login pages only */
+ .searchMan2{
+    transform: matrix(-1, 0.08, 0.08, 1, 0, 0);
+
+  }
+  p a {
+    text-decoration: none;
+  }
+  button a{
+    text-decoration: none;
+  }
+
+  /*Responsive Designs*/
+
+  
+

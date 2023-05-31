@@ -1,0 +1,147 @@
+
+<?php
+
+session_start();
+if(isset($_SESSION["moeuser"])){
+        header("Location: moedashboard.php");
+    }
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet"   href="./forms.css">
+    <title>Sign Up Ministry</title>
+    
+
+    <?php
+    include 'databaseconnect.php';
+
+
+
+    if(isset($_POST["submit"])){//the code inside will work only when the name submit has been initiated
+
+        $civilid= trim($_POST['civilservant_id']);
+        $username= trim($_POST['username']);
+        $cname = trim($_POST['countyname']);
+        $ccode= trim($_POST['countycode']);
+        $password= trim($_POST['password_moe']);
+       
+        $confirmp = trim($_POST['passwordconfirm']);
+        $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
+
+        $errors = array();
+
+    
+
+        if(empty($civilid) OR empty($ccode) OR empty($cname) ){
+            array_push($errors,"Fill all fields");
+        }
+
+        if($password !== $confirmp){
+            array_push($errors,"Password is not similar in both fields");
+        }
+        //Searching through the database to see if the civil servant id already exists
+        $sql_reentry = "SELECT * FROM moe_users WHERE civilservant_id= '$civilid' ";
+        $result = $con->query($sql_reentry);
+        if ($result->num_rows > 0) {
+
+            array_push($errors,"User Already Exists");
+
+        }
+
+
+        if(count($errors)>0){
+            foreach ($errors as $error){
+                echo $error;
+            }
+        }
+        else{
+
+            $sql = " INSERT INTO moe_users( civilservant_id, username, countyname, countycode, password) VALUES ('$civilid', '$username', '$cname','$ccode', '$password_encrypt')";
+
+            if ($con->query($sql) === TRUE) {
+
+
+               echo " 'Registered Successfully ";
+              
+
+               header("Location: ministry_login.php");
+             
+            } else {
+                echo "Error: " . $sqli . "<br>" . $con->error;
+            }
+               
+        }
+
+            
+
+    }     
+
+    $con->close();
+
+?>
+
+
+    
+</head>
+<body>
+    <div class="min_top">
+        <div>
+            <img src="./images/officialLogo.png" alt="not found">
+        </div>
+        <div class="min_top2">
+            <i class="fa-solid fa-arrow-right-to-bracket fa-2x"></i>
+           <button type="button"><a href="ministry_login.php">Login</a></button>
+           
+        </div>
+       
+    </div>
+    <main>
+    <div class="creationmoe">
+
+        
+        <div>
+            <img src="./images/searching.png" alt="not Found" class="searchMan">
+        </div>
+        
+        <div class="moeform" id="mmt2">
+            <div class="formhead"><h3>Ministry of Education Regional Account Creation</h3></div>
+            <div class="moeform2" >
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                    <i class="fa-solid fa-id-card-clip fa-xl"></i>
+                    <input type="text" name="civilservant_id" id="civilservant_id" placeholder="Civil Servant Id" ><br>
+                    <i class="fa-solid fa-person-circle-question fa-xl"></i>
+                    <input type="text" name="username" id="username" placeholder="Full Name"><br>
+                    <i class="fa-solid fa-location-pin-lock fa-xl"></i>
+
+                    <input type="text" name="countyname" id="countyname" placeholder="County Name"><br>
+                    <i class="fa-solid fa-location-pin-lock fa-xl"></i>
+
+                    <input type="number" name="countycode" id="countycode" placeholder="County Code" ><br>
+                    <i class="fa-solid fa-lock  fa-xl"></i>
+                    <input type="password" name="password_moe" id="password_moe" placeholder="Enter Password" ><br>
+                    <i class="fa-solid fa-circle-check fa-xl"></i>
+                    <input type="password" name="passwordconfirm" id="passwordconfirm" placeholder="Confirm Password" >
+                    <input type="submit" value="Register" name="submit">
+                    <p>Have an account?<a href="ministry_login.php">Login</a></p>
+                </form>
+
+                
+            </div>
+        </div>
+    </div>
+    </main>
+</body>
+</html>

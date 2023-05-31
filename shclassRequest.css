@@ -1,0 +1,30 @@
+*{
+    margin: 0px;
+}
+.rlog{
+    
+    margin-right: 30px;
+    padding: 40px;
+    
+}
+.minTop{background-color: none;}
+
+
+
+tbody td{
+   
+    padding: 10px;
+    text-align: center;
+    
+}
+
+table{
+    border-radius: 50px;
+    margin: 40px;
+   
+    box-shadow:  10px 10px 10px rgba(99, 99, 99, 0.6);
+    padding: 40px;
+}
+h1{
+    text-align: center;
+}
